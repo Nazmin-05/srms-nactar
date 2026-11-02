@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Student Result Management System</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <h1>Student Result Management System</h1>
+
+    <form>
+      <label for="name">Student Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="studentName"
+        placeholder="Enter Student Name"
+      />
+
+      <br /><br />
+
+      <h3>Enter Subject Marks</h3>
+
+      <label for="bangla">Bangla:</label>
+      <input
+        type="number"
+        id="bangla"
+        name="bangla"
+        min="0"
+        max="100"
+        required
+      />
+
+      <br /><br />
+
+      <label for="english">English:</label>
+      <input
+        type="number"
+        id="english"
+        name="english"
+        min="0"
+        max="100"
+        required
+      />
+
+      <br /><br />
+
+      <label for="math">Mathematics:</label>
+      <input type="number" id="math" name="math" min="0" max="100" required />
+
+      <br /><br />
+
+      <label for="science">Science:</label>
+      <input
+        type="number"
+        id="science"
+        name="science"
+        min="0"
+        max="100"
+        required
+      />
+
+      <br /><br />
+
+      <label for="ict">ICT:</label>
+      <input type="number" id="ict" name="ict" min="0" max="100" required />
+
+      <br /><br />
+
+      <button type="button" id="calculate">Calculate Result</button>
+    </form>
+
+    <h2>Student Result</h2>
+
+    <div id="result">
+      <p>Result will be displayed here.</p>
+    </div>
+    <script>
+      document.getElementById("calculate").onclick = function () {
+        let name = document.getElementById("name").value;
+
+        let bangla = Number(document.getElementById("bangla").value);
+        let english = Number(document.getElementById("english").value);
+        let math = Number(document.getElementById("math").value);
+        let science = Number(document.getElementById("science").value);
+        let ict = Number(document.getElementById("ict").value);
+
+        if (name == "") {
+          alert("Please enter student name!");
+          return;
+        }
+
+        if (
+          bangla < 0 ||
+          bangla > 100 ||
+          english < 0 ||
+          english > 100 ||
+          math < 0 ||
+          math > 100 ||
+          science < 0 ||
+          science > 100 ||
+          ict < 0 ||
+          ict > 100
+        ) {
+          alert("Marks must be between 0 and 100!");
+          return;
+        }
+
+        let total = bangla + english + math + science + ict;
+
+        let average = total / 5;
+
+        let result;
+
+        if (
+          bangla >= 33 &&
+          english >= 33 &&
+          math >= 33 &&
+          science >= 33 &&
+          ict >= 33
+        ) {
+          result = "PASS";
+        } else {
+          result = "FAIL";
+        }
+
+        let grade;
+
+        if (result == "FAIL") {
+          grade = "F";
+        } else if (average >= 80) {
+          grade = "A+";
+        } else if (average >= 70) {
+          grade = "A";
+        } else if (average >= 60) {
+          grade = "A-";
+        } else if (average >= 50) {
+          grade = "B";
+        } else if (average >= 40) {
+          grade = "C";
+        } else {
+          grade = "D";
+        }
+
+        document.getElementById("result").innerHTML =
+          "<h3>Final Result</h3>" +
+          "<p>Student Name: " +
+          name +
+          "</p>" +
+          "<p>Total Marks: " +
+          total +
+          " / 500</p>" +
+          "<p>Average Marks: " +
+          average.toFixed(2) +
+          "</p>" +
+          "<p>Final Grade: " +
+          grade +
+          "</p>" +
+          "<p>Pass or Fail: " +
+          result +
+          "</p>";
+      };
+
+      let subjects = ["Bangla", "English", "Math", "Science", "ICT"];
+
+      let marks = [80, 75, 90, 70, 85];
+
+      let total = 0;
+
+      for (let i = 0; i < 5; i++) {
+        total = total + marks[i];
+      }
+
+      console.log("Total Marks: " + total);
+
+      for (let i = 0; i < 5; i++) {
+        console.log(subjects[i] + ": " + marks[i]);
+      }
+
+      let i = 1;
+
+      while (i <= 10) {
+        console.log(i);
+        i++;
+      }
+    </script>
+  </body>
+</html>
